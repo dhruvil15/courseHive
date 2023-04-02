@@ -31,10 +31,7 @@ export const Register: FC = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     setErrors(validator.registerValidation(email, password, name, eduName))
-
-    const _id = uuidv1()
-
-    register(_id, name, email, eduName, password) 
+    await register(name, email, eduName, password)
   }
 
   useEffect(() => {
@@ -51,11 +48,11 @@ export const Register: FC = () => {
   // redirect the user to the home page.
   useEffect(() => {
     if (!user) {
-      console.log("In here")
+      console.log('In here')
       return
     }
-    
-    console.log("In here 2")
+
+    console.log('In here 2')
     history.push(ROUTES.App.home)
   }, [user])
 

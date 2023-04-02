@@ -3,20 +3,25 @@
 import { toast } from 'react-hot-toast'
 import { setUser, useAppDispatch } from '../../redux'
 import { UserType } from '../../types'
-import { useMailman2 } from './useMailman2'
+import { useMailman } from '.'
 
 export const useUser = () => {
   const dispatch = useAppDispatch()
-  const { mailman2 } = useMailman2()
+  const { mailman } = useMailman()
 
   // Fetch user info and rehydrate state
   const refresh = async () => {}
 
-  const register = async (_id: string, name: string, email: string, eduName: string, password: string) => {
+  const register = async (name: string, email: string, institution: string, password: string) => {
     try {
-      const data = {_id,name,email,eduName,password}
-      dispatch(setUser(data))
-      await mailman2('registration','POST',data)
+      const userData = { name, email, institution, password }
+      const data = await mailman('users', 'register', 'POST', userData)
+
+      if (!data?.user) {
+        return
+      }
+
+      dispatch(setUser(data.user))
     } catch (err) {
       console.error(err)
       toast.error((err as any)?.message)
@@ -25,16 +30,14 @@ export const useUser = () => {
 
   const login = async (email: string, password: string) => {
     try {
-      const user: UserType = {
-        _id: '12234',
-        name: 'Test Account',
-        email: 'test@gmail.com',
-        password: '123445',
-        eduName: 'dal'
+      const userData = { email, password }
+      const data = await mailman('users', 'login', 'POST', userData)
+
+      if (!data?.user) {
+        return
       }
 
-      dispatch(setUser(user))
-      await fetch(`http://localhost:8000/login/${email}`);
+      dispatch(setUser(data.user))
     } catch (err) {
       console.error(err)
       toast.error((err as any)?.message)

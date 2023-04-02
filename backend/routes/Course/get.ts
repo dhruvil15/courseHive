@@ -146,10 +146,6 @@ route.get('/', async (req: Request, res: Response) => {
     }
   ])
 
-  if (!courses || !courses.length) {
-    return res.status(404).json({ message: 'No courses were found for this user' })
-  }
-
   res.json({
     courses,
     status: 'ok'
@@ -179,8 +175,8 @@ route.get('/preview/:_id', async (req: Request, res: Response) => {
   }
 
   const alreadyInCourse =
-    !!course.teachers.find((teacher) => teacher.equals(user._id)) ||
-    !!course.students.find((student) => student.equals(user._id))
+    !!course.teachers.find(teacher => teacher.equals(user._id)) ||
+    !!course.students.find(student => student.equals(user._id))
 
   res.json({
     course,

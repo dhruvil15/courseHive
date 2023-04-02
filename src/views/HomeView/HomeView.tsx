@@ -8,8 +8,8 @@ import { StyledHomeView } from './'
 
 const HomeView: FC = () => {
   const dispatch = useAppDispatch()
-  const { courses } = useAppSelector((state) => state.courses)
-  const { user } = useAppSelector((state) => state.user)
+  const { courses } = useAppSelector(state => state.courses)
+  const { user } = useAppSelector(state => state.user)
   const [loading, setLoading] = useState(true)
   const { mailman } = useMailman()
 
@@ -17,9 +17,13 @@ const HomeView: FC = () => {
     try {
       setLoading(true)
 
-      const { courses } = await mailman('courses', '')
+      const data = await mailman('courses', '')
 
-      dispatch(setCourses(courses))
+      if (!data?.courses) {
+        return
+      }
+
+      dispatch(setCourses(data?.courses))
     } catch (err) {
       console.error(err)
       toast.error((err as any)?.message)
@@ -50,7 +54,7 @@ const HomeView: FC = () => {
         <div className="course-list">
           {[...courses]
             .sort((a, b) => compareDates(b.createdAt, a.createdAt))
-            .map((course) => (
+            .map(course => (
               <CourseCard course={course} key={course._id} />
             ))}
         </div>

@@ -30,7 +30,7 @@ const StyledHomeView = styled.div<StyledProps>`
   .course-list {
     margin-top: -80px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
   }
 `
