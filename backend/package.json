@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "tsc && env node built/server.js",
+    "build": "tsc",
     "watch": "env yarn nodemon ./server.ts",
     "env": "dotenv -e .env"
   },
