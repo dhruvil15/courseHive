@@ -1,6 +1,3 @@
-// Author: Dhruvil Trivedi
-// This is the validation error page for Registration, where all the error messages are set.
-
 export const registerValidation = (
   email: string,
   password: string,

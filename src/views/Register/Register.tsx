@@ -1,6 +1,3 @@
-// Author: Dhruvil Trivedi
-// This is the Registration page and it's logic for it
-
 import { FC, useEffect, useState } from 'react'
 import { validator } from '../../utils/validator'
 import { StyledRegister } from '.'
@@ -8,7 +5,6 @@ import { Link, useHistory } from 'react-router-dom'
 import { useUser } from '../../utils'
 import { ROUTES } from '../../utils'
 import { useAppSelector } from '../../redux'
-import { v1 as uuidv1 } from 'uuid'
 
 export const Register: FC = () => {
   const history = useHistory()

@@ -1,3 +1,5 @@
+// Author: Dhruvil Trivedi - B00839059
+
 import mongoose, { Types } from 'mongoose'
 import { Request, Response } from 'express'
 import { User } from '../../models'

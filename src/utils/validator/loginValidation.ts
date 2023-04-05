@@ -1,6 +1,3 @@
-// Author: Dhruvil Trivedi
-// This is the validation error page for login, where all the error messages are set.
-
 export const loginValidation = (email:string, password:string) => {
     let errors = {
         email: '',
@@ -20,4 +17,3 @@ export const loginValidation = (email:string, password:string) => {
 
     return errors;
 }
-
