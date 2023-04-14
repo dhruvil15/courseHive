@@ -13,7 +13,7 @@ const Card: FC<CardType> = ({ _id, mode, title, img, desc, students }) => {
     students: students
   })
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCourse((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value
@@ -41,7 +41,7 @@ const Card: FC<CardType> = ({ _id, mode, title, img, desc, students }) => {
   return (
     <StyledCard>
       <div className="card">
-        <img src={course.img} alt="classIMG" />
+        {<img src={course.img} alt="classIMG" />}
         <p>
           <label htmlFor="title">Course Title:</label>
         </p>
@@ -56,13 +56,15 @@ const Card: FC<CardType> = ({ _id, mode, title, img, desc, students }) => {
         <p>
           <label htmlFor="desc">Course Description:</label>
         </p>
-        <textarea
-          name="desc"
-          className={`text ${mode}-text`}
-          value={course.desc}
-          onChange={handleChange}
-          disabled={mode == '' ? true : false}
-        />
+        {
+          <textarea
+            name="desc"
+            className={`text ${mode}-text`}
+            value={course.desc}
+            onChange={handleChange}
+            disabled={mode == '' ? true : false}
+          />
+        }
         <hr style={{ width: '100%' }} />
         {course.students.length == 0 ? (
           <span>No students are enrolled in this course</span>
